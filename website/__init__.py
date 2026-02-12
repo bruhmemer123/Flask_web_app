@@ -9,10 +9,9 @@ DB_NAME = "database.db"
 
 def create_app():
     app = Flask(__name__)
-    app.config['SECRET_KEY']="lmaoidk"
+    app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "dev-secret-key")
     database_url = os.environ.get('DATABASE_URL')    
     if database_url:
-    # Render sometimes gives postgres:// instead of postgresql://
         if database_url.startswith("postgres://"):
             database_url = database_url.replace("postgres://", "postgresql://", 1)
 
